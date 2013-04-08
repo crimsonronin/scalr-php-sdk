@@ -1,0 +1,20 @@
+{
+    "name": "crimsonronin/scalr-php-sdk",
+    "description": "Scalr PHP SDK",
+    "license": "",
+    "keywords": [
+        "zoop",
+        "scalr"
+    ],
+    "homepage": "http://zoopcommerce.com/",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "guzzle/guzzle": "3.3.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Zoop\\": "src/"
+        }
+    }
+}

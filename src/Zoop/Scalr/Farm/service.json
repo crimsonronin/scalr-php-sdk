@@ -1,0 +1,32 @@
+{
+    "name": "Farm",
+    "apiVersion": "2.3.0",
+    "baseUrl": "https://api.scalr.net",
+    "description": "",
+    "operations": {
+        "GetUsers": {
+            "httpMethod": "GET",
+            "uri": "/?Action=",
+            "summary": "Gets a list of users",
+            "responseClass": "GetUsersOutput"
+        }
+    },
+    "models": {
+        "GetUsersOutput": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "location": "json",
+                        "type": "string"
+                    },
+                    "age": {
+                        "location": "json",
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}
