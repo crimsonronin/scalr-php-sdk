@@ -1,40 +1,44 @@
 <?php
 
-return array(
+return [
     'apiVersion' => '2.3.0',
-    'serviceFullName' => 'Amazon Simple Storage Service',
-    'serviceAbbreviation' => 'Amazon S3',
+    'serviceFullName' => 'Scalr Farms',
+    'serviceAbbreviation' => '',
     'serviceType' => 'rest-xml',
     'timestampFormat' => 'rfc822',
-    'globalEndpoint' => 's3.amazonaws.com',
-    'signatureVersion' => 's3',
-    'namespace' => 'S3',
-    'operations' => array(
-        'FarmsList' => array(
+    'namespace' => 'Zoop\Scalr\Farm',
+    'operations' => [
+        'GetFarms' => [
             'httpMethod' => 'GET',
-            'uri' => '/?Action={Action}',
-            'class' => 'Zoop\\S3\\Command\\S3Command',
-            'responseClass' => 'GetBucketAclOutput',
-            'responseType' => 'model',
-            'summary' => 'Gets the access control policy for the bucket.',
-            'parameters' => array(
-                'Action' => array(
-                    'required' => true,
-                    'type' => 'string',
+            'uri' => '/?Action={Action}&',
+            'responseClass' => 'GetFarmsOutput',
+            'summary' => 'Gets all server farms',
+            'parameters' => [
+                'Action' => [
                     'location' => 'uri',
-                ),
-                'SubResource' => array(
-                    'required' => true,
+                    'type' => 'string',
                     'static' => true,
-                    'location' => 'query',
-                    'sentAs' => 'acl',
-                    'default' => '_guzzle_blank_',
-                ),
-                'command.expects' => array(
-                    'static' => true,
-                    'default' => 'application/xml',
-                ),
-            ),
-        ),
-    ),
-);
+                    'default' => 'FarmList'
+                ]
+            ]
+        ],
+    ],
+    "models" => [
+        "GetFarmsOutput" => [
+            "type" => "array",
+            "items" => [
+                "type" => "object",
+                "properties" => [
+                    "name" => [
+                        "location" => "json",
+                        "type" => "string"
+                    ],
+                    "age" => [
+                        "location" => "json",
+                        "type" => "integer"
+                    ]
+                ]
+            ]
+        ],
+    ]
+];

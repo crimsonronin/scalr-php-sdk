@@ -1,16 +1,17 @@
 <?php
 
-namespace Zoop\Scalr\Server;
+namespace Zoop\Scalr\Farm;
 
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
+use Zoop\Scalr\Common\Signature\SignatureListener;
 
 /**
  * My example web service client
  */
-class FarmClient extends Client
-{
+class FarmClient extends Client {
+
     /**
      * Factory method to create a new MyServiceClient
      *
@@ -24,20 +25,23 @@ class FarmClient extends Client
      *
      * @return self
      */
-    public static function factory($config = array())
-    {
+    public static function factory($config = array()) {
         $default = array(
             'base_url' => '{scheme}://api.scalr.net/',
-            'scheme'   => 'https'
+            'scheme' => 'https'
         );
-        $required = array('username', 'password', 'base_url');
+        $required = array('key', 'secret', 'base_url');
         $config = Collection::fromConfig($config, $default, $required);
 
         $client = new self($config->get('base_url'), $config);
         // Attach a service description to the client
-        $description = ServiceDescription::factory(__DIR__ . '/service.json');
+        $description = ServiceDescription::factory(__DIR__ . '/Resources/2.3.0.php');
+
         $client->setDescription($description);
+
+        $client->addSubscriber(new SignatureListener());
 
         return $client;
     }
+
 }
